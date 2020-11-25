@@ -33,7 +33,7 @@ def get_args():
     parser.add_argument("--saved_path", type=str, default="trained_models")
     parser.add_argument("--load_from_previous_stage", type=bool, default=False,
                         help="Load weight from previous trained stage")
-    parser.add_argument("--use_gpu", type=bool, default=True)
+    parser.add_argument("--use_gpu", type=bool, default=False)
     args = parser.parse_args()
     return args
 
