@@ -40,6 +40,7 @@ class CustomReward(Wrapper):
         super(CustomReward, self).__init__(env)
         self.observation_space = Box(low=0, high=255, shape=(1, 84, 84))
         self.curr_score = 0
+        self.furthest_x = 0
         if monitor:
             self.monitor = monitor
         else:
@@ -49,15 +50,19 @@ class CustomReward(Wrapper):
         state, reward, done, info = self.env.step(action)
         if self.monitor:
             self.monitor.record(state)
+        # info = {'coins': 0, 'flag_get': False, 'life': 2, 'score': 100, 'stage': 1, 'status': 'small', 'time': 378, 'world': 1, 'x_pos': 1187, 'y_pos': 111}
+        if(info["x_pos"]>self.furthest_x):
+            self.furthest_x = info["x_pos"]
+            reward += self.furthest_x / 100
         state = process_frame(state)
-        reward += (info["score"] - self.curr_score) / 40.
+        reward += (info["score"] - self.curr_score) / 40
         self.curr_score = info["score"]
         if done:
             if info["flag_get"]:
-                reward += 50
+                reward += 500
             else:
-                reward -= 50
-        return state, reward / 10., done, info
+                reward -= 80
+        return state, reward / 10, done, info
 
     def reset(self):
         self.curr_score = 0
