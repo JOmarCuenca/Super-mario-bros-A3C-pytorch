@@ -1,0 +1,6 @@
+torch
+numpy
+gym
+opencv-python
+gym-super-mario-bros
+nes-py
