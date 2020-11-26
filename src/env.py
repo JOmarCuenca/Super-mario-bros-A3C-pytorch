@@ -1,5 +1,6 @@
 """
 @author: Viet Nguyen <nhviet1009@gmail.com>
+modified by Jesús Omar Cuenca Espino
 """
 
 import gym_super_mario_bros
