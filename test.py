@@ -35,6 +35,7 @@ def test(opt):
     else:
         model.load_state_dict(torch.load("{}/a3c_super_mario_bros_{}_{}".format(opt.saved_path, opt.world, opt.stage),
                                          map_location=lambda storage, loc: storage))
+        print(model.state_dict())
     model.eval()
     state = torch.from_numpy(env.reset())
     done = True

@@ -35,6 +35,12 @@ def local_train(index, opt, global_model, optimizer, save=False):
                            "{}/a3c_super_mario_bros_{}_{}".format(opt.saved_path, opt.world, opt.stage))
             print("Process {}. Episode {}".format(index, curr_episode))
         curr_episode += 1
+        """
+        Prints the Q Table every 5-th episode only for the process 0.
+        So that we can monitor the progress of the algorithm.
+        """
+        if(index == 0 and curr_episode%5==0):
+            print(global_model.state_dict())
         local_model.load_state_dict(global_model.state_dict())
         if done:
             h_0 = torch.zeros((1, 512), dtype=torch.float)
