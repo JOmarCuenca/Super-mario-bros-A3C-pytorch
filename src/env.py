@@ -50,6 +50,10 @@ class CustomReward(Wrapper):
         state, reward, done, info = self.env.step(action)
         if self.monitor:
             self.monitor.record(state)
+        """
+            Se le dio la posibilidad de darle una recompensa al agente cuando llega mas lejos en el juego, de esta forma el agente
+            de una manera mejor que avanzar es mejor que quedarse quieto.
+        """
         # info = {'coins': 0, 'flag_get': False, 'life': 2, 'score': 100, 'stage': 1, 'status': 'small', 'time': 378, 'world': 1, 'x_pos': 1187, 'y_pos': 111}
         if(info["x_pos"]>self.furthest_x):
             self.furthest_x = info["x_pos"]
