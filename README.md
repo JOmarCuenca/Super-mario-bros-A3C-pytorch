@@ -34,20 +34,38 @@ To make the kid learn faster, and more stable, the dad, instead of telling his s
 ### Asynchronous Advantage Actor-Critic
 If an agent discovers environment alone, the learning process would be slow. More seriously, the agent could be possibly bias to a particular suboptimal solution, which is undesirable. What happen if you have a bunch of agents which simultaneously discover different part of the environment and update their new obtained knowledge to one another periodically? It is exactly the idea of **Asynchronous Advantage Actor-Critic**. Now the kid and his mates in kindergarten have a trip to a beautiful beach (with their teacher, of course). Their task is to build a great sand castle. Different child will build different parts of the castle, supervised by the teacher. Each of them will have different task, with the same final goal is a strong and eye-catching castle. Certainly, the role of the teacher now is the same as the dad in previous example. The only difference is that the former is busier :sweat_smile:
 
+## Instalation
+
+I have added a requirments.txt in order for you to simple run the command
+
+* **pip install -r requirements** 
+
+So it nows precisely what to install in a conda environment or a virtual environment using **python venv**.
+
 ## How to use my code
 
 With my code, you can:
-* **Train your model** by running **python train.py**
-* **Test your trained model** by running **python test.py**
+* **Train your model** by running **python3 train.py**
+* **Test your trained model** by running **python3 test.py**
 
-## Trained models
+## Changes Done to the Original Code
 
-You could find some trained models I have trained in [Super Mario Bros A3C trained models](https://drive.google.com/open?id=1itDw9sXPiY7xC4u72RIfO5EdoVs0msLL)
- 
-## Requirements
+As this is a scholar project the original code has been slightly modified so it could work in 2020.
 
-* **python 3.6**
-* **gym**
-* **cv2**
-* **pytorch** 
-* **numpy**
+
+### First 
+
+The original code worked using **BinarySpaceToDiscreteSpaceEnv** as the main environment for the agent to play around in.
+However that has been deprecated and now the agent plays around in a **JoypadSpace** as now that is the main standard environment.
+
+### Secondly
+
+The original reward system only gave a reward to the agent if the score went up, (when collecting coins, killing enemies, or finishing the game) 
+therefore it was really hard for the agent to quickly learn that getting to the flag was good.
+So, in the custom reward system of the agent, we added the reward of getting further into the level was very good.
+This greately optimized the speed at which the agent learnt how to play the game properly.
+
+## Experimental Results
+
+The original author of the code mentioned that originally the agent learned how to beat the game at around 24 hrs of learning in a Google Cloud VM.
+However with the little tweaks that we made the agent was able to learn how to beat a level in a local laptop in under 8 hrs. With no CUDA support.
